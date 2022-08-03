@@ -41,9 +41,9 @@ setup *图形化界面查看服务，并且可以设置服务的开机自启动
 ls -l /etc/init.d *在命令行界面查看服务
 ```
 
-![](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220720095627811.png)
+![](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220720095627811.png)
 
-![image-20220720101437877](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220720101437877.png)
+![image-20220720101437877](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220720101437877.png)
 
 ##  给各个服务设置运行级别（chkconfig）
 

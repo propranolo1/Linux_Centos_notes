@@ -29,7 +29,7 @@ A=200
 echo "A=$A"
 ```
 
-![image-20220722134756384](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220722134756384.png)
+![image-20220722134756384](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220722134756384.png)
 
 ### 取消一个变量
 
@@ -40,7 +40,7 @@ unset A
 echo "A=$A"
 ```
 
-![image-20220722134949104](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220722134949104.png)
+![image-20220722134949104](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220722134949104.png)
 
 ## 静态变量
 
@@ -51,7 +51,7 @@ unset A
 echo "A=$A"
 ```
 
-![image-20220722135348240](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220722135348240.png)
+![image-20220722135348240](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220722135348240.png)
 
 无法unset静态变量
 
@@ -90,7 +90,7 @@ B=$(date)
 echo $B
 ```
 
-<img src="C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220722140440717.png" alt="image-20220722140440717" style="zoom:200%;" />
+<img src="https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220722140440717.png" alt="image-20220722140440717" style="zoom:200%;" />
 
 ## 位置参数变量（相当于input
 
@@ -111,7 +111,7 @@ echo ""
 echo "$@"
 ```
 
-![image-20220726171458293](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220726171458293.png)
+![image-20220726171458293](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220726171458293.png)
 
 ## 预定义变量
 
@@ -121,9 +121,9 @@ $! 后台运行的最后一个进程的进程号
 $? 最后一次执行命令的状态 0成功 非零可能失败
 ```
 
-![image-20220725092113590](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220725092113590.png)
+![image-20220725092113590](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220725092113590.png)
 
-![image-20220725092130988](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220725092130988.png)
+![image-20220725092130988](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220725092130988.png)
 
 ## 运算符
 
@@ -219,7 +219,7 @@ done
 echo "sum=$sum"
 ```
 
-![image-20220726173853033](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220726173853033.png)
+![image-20220726173853033](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220726173853033.png)
 
 #### 第二种
 
@@ -258,7 +258,7 @@ read -t 5-p "五秒内输入B的值" B
 echo "B的值为$B"
 ```
 
-![image-20220728101557433](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220728101557433.png)
+![image-20220728101557433](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220728101557433.png)
 
 ## 函数
 
@@ -270,7 +270,7 @@ echo "B的值为$B"
 
 返回最后的文件名
 
-![image-20220728102123639](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220728102123639.png)
+![image-20220728102123639](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220728102123639.png)
 
 ### dirname
 
@@ -278,7 +278,7 @@ echo "B的值为$B"
 
 返回路径
 
-![image-20220728102156607](C:\Users\JInXiN\AppData\Roaming\Typora\typora-user-images\image-20220728102156607.png)
+![image-20220728102156607](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220728102156607.png)
 
 ### 自定义函数
 

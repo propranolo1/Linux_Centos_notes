@@ -38,7 +38,7 @@ rm /etc/yum.repos.d/*
 
 enabled改为1
 
-![image-20220619094404355](C:\Users\JInXiN\Desktop\Centos指南\image-20220619094404355.png)
+![image-20220619094404355](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220619094404355.png)
 
 ### 清除和重建缓存
 
@@ -60,6 +60,12 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
 
 ```
 yum install -y vim
+```
+
+## 卸载
+
+```
+yum remove 软件名称
 ```
 
 ## 查看安装包是否在服务器上
