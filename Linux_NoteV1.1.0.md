@@ -354,27 +354,46 @@ rpm -Uvh 安装包名称
 | ---- | -------------- |
 | -U   | 升级指定的软件 |
 
-# vim使用
+# vim编辑器
 
-### 进入当前光标位置之前输入（i
+vim有三种模式
 
-### 进入当前光标位置之后输入（a
+1. 命令模式
 
-### 显示行号（:set nu
+   控制光标移动，可对文本进行复制（yy），黏贴（p），删除（dd），查找
 
-### 不显示行号（:set nonu
+2. 末行模式
 
-### 退出（:q
+   保存或退出文档，设置编辑环境
 
-### 强制退出（:q！
+3. 编辑模式
 
-### 保存退出（:wq
+   正常的输入，编辑文档
 
-### 复制（yy
+| 参数 | 说明                            |
+| ---- | ------------------------------- |
+| yy   | 复制整行                        |
+| 5yy  | 复制从光标开始的5行             |
+| p    | 黏贴                            |
+| dd   | 删除（剪切）光标所在行          |
+| 5dd  | 删除（剪切）从光标开始的往下5行 |
+| u    | 撤销上一步操作                  |
+| 替换 | 替换内容待完善                  |
 
-```
-5yy *表示复制光标往下的5行内容
-```
+末行模式中的命令
+
+| 参数      | 说明                 |
+| --------- | -------------------- |
+| :q        | 退出不保存           |
+| :wq       | 保存并退出           |
+| :q!       | 强制退出不保存       |
+| :wq!      | 强制保存退出         |
+| :set nu   | 显示行号             |
+| :set nonu | 不显示行号           |
+| :w        | 保存                 |
+| :整数     | 跳转到该行号         |
+| ?字符串   | 从下往上搜索该字符串 |
+| /字符串   | 从上往下搜索该字符串 |
 
 ### 删除光标所在行（dd
 
@@ -449,7 +468,10 @@ locate a.txt *定位a.txt的位置
 cat a.txt | grep yes *查找a.txt中是否有yes
 cat a.txt | grep -n yes *与上一条意思相同，但-n可以显示所在行号
 cat a.txt | grep -ni yes *-i的含义时不区分大小写
+```
 
+```
+grep -v *对过滤的内容进行反向选择
 ```
 
 # 磁盘查询
@@ -492,6 +514,22 @@ ls -l /home | grep "d" | wc -l *对目录个数进行统计
 ```
 ls -lR /home | grep "-" | wc -l *进行递归统计
 ```
+
+## 通配符的使用
+
+可以进行模糊搜索
+
+| 参数  | 说明                      |
+| ----- | ------------------------- |
+| *     | 代表匹配零个或多个        |
+| ？    | 匹配单个字符              |
+| [0-9] | 代表匹配0~9之间的单个字符 |
+
+```
+ls -l /dev/sd*
+```
+
+![image-20220805162716967](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220805162716967.png)
 
 # 分区
 
@@ -601,13 +639,13 @@ unzip -d /opt/tmp/ a.zip *把a.zip解压到/opt/tmp中
 
 ## 打包指令（tar
 
-| 参数 | 说明               |
-| ---- | ------------------ |
-| -c   | 产生tar打包文件    |
-| -v   | 显示详细信息       |
-| -f   | 指定压缩后的文件名 |
-| -z   | 打包同时压缩       |
-| -x   | 解压tar文件        |
+| 参数 | 说明                 |
+| ---- | -------------------- |
+| -c   | 创建压缩文件         |
+| -x   | 解压                 |
+| -f   | 指定压缩后的文件名   |
+| -z   | 使用Gzip压缩或解压   |
+| -v   | 显示压缩或解压的过程 |
 
 ```
 tar -zcvf a.tar.gz a.txt b.txt *压缩并打包a.txt b.txt 压缩包的文件名为a.tar.gz
@@ -965,12 +1003,20 @@ rmdir /mnt/sr0 *删除sr0目录（无法删除存在内容的目录，即无法�
 rm -rf /mnt/sr0 *可以删除非空目录（强制删除
 ```
 
-## 创建空文件（touch
+## 创建空文件和修改文件时间（touch
 
 ```
 touch hello.txt *创建一个名为hello的txt空文件
 touch a.txt b.txt *可以一次性创建多个文件
 ```
+
+| 参数 | 说明                       |
+| ---- | -------------------------- |
+| -a   | 修改读取时间               |
+| -m   | 修改修改时间               |
+| -d   | 同时修改读取时间和修改时间 |
+
+![image-20220805145233190](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220805145233190.png)
 
 ## 拷贝（cp
 
@@ -1031,6 +1077,16 @@ echo “内容” > a.txt *将双引号中的内容写入到a.txt当中
 该指令还可以和cat指令结合
 ```
 
+### 如果要将错误的提示输出重定向到一个文件中
+
+`2>`可以用于重定向输入报错的内容，可用于记录报错的内容
+
+```
+ls -l xxx 2> 文件名
+```
+
+![image-20220805160648037](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220805160648037.png)
+
 ## 输出内容到控制台（echo
 
 ![image-20220620171922604](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220620171922604.png)
@@ -1045,13 +1101,41 @@ echo $PATH *输出环境变量到控制台
 head -n 5 文件名 *显示文件的前5行，默认显示前10行
 ```
 
-tail（显示文件尾部）
+## tail（显示文件尾部）
 
 ```
 tail a.txt *显示文件的尾部10行
 tail -n 5 a.txt *显示文件尾部5行内容
 tail -f a.txt *显示a.txt的实时所有更新，监控的作用（可用于日志监控
 ```
+
+## 查看文件的行数，字数，字节数（wc
+
+| 参数 | 说明         |
+| ---- | ------------ |
+| -l   | 显示行数     |
+| -w   | 显示单词数量 |
+| -c   | 显示字节数   |
+
+![image-20220805144021368](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220805144021368.png)
+
+## 查看文件的属性（stat
+
+可以查看文件的各种时间
+
+```
+stat 文件名
+```
+
+![image-20220805144218224](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220805144218224.png)
+
+**最近访问**时间表示最近是否有通过vim，cat来查看该文件
+
+**最近更改**表示最近是否有使用vim，echo等命令来修改文件
+
+**最近改动**表示最近是否有对文件进行修改，不管是属性上的修改还是文件内容的修改
+
+**最近访问**和**最近改动**都可以通过touch进行修改，但touch**无法修改最近改动时间**，相反最近改动时间会记录下你touch修改时间的时间
 
 ## 软连接，类似于快捷方式（ln
 
@@ -1066,6 +1150,16 @@ rm -rf guazai *删除名为guazai的软连接
 ## 查看命令的输入历史（history
 
 ![image-20220620190032521](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220620190032521.png)
+
+能显示执行过的1000条命令
+
+可以在/etc/profile中的HISTSIZE修改记录的条数
+
+```
+history -c *清空所有历史命令记录
+```
+
+查看到命令的行数后，可以直接使用`!行数`来执行之前执行过的指令
 
 # 网络指南
 
@@ -1432,7 +1526,7 @@ chkconfig --level 级别 服务名称 on/off *设置服务在某个级别的自�
 
 
 
-# 进程指南（ps，top
+# 进程指南
 
 ## 进程介绍
 
@@ -1484,6 +1578,16 @@ killall 进程名称 *终止所有该名称的进程
 kill -9 进程pid *强制终止该PID进程
 ```
 
+查看系统的负载信息（uptime
+
+```
+uptime
+```
+
+![image-20220805110807183](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220805110807183.png)
+
+负载值越低越好，尽量不要长期超过1，生产环境不要超过5
+
 ## 任务管理器（top
 
 类似于任务管理器
@@ -1504,306 +1608,6 @@ M 按照内存使用进行排序
 
 C 按照CPU使用进行排序
 
-# Shell指南
 
-shell是一个命令解释器
 
-应用-shell-内核-硬件
-
-shell为用户提供了一个想linux内核发送请求以便运行程序的程序
-
-用户可以使用shell启动，挂起，停止，编写一些程序
-
-##  编写一个shell
-
-```shell
-!#/bin/bash
-echo "hello,world"
-```
-
-```shell
-chmod 744 文件名.sh
-./文件名.sh *运行
-```
-
-##  shell变量
-
-### 定义一个变量
-
-```shell
-A=200
-echo "A=$A"
-```
-
-![image-20220722134756384](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220722134756384.png)
-
-### 取消一个变量
-
-```shell
-A=200
-echo "A=$A"
-unset A
-echo "A=$A"
-```
-
-![image-20220722134949104](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220722134949104.png)
-
-## 静态变量
-
-```shell
-readonly A=200
-echo "A=$A"
-unset A
-echo "A=$A"
-```
-
-![image-20220722135348240](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220722135348240.png)
-
-无法unset静态变量
-
-## 全局环境变量
-
-可供其他shell使用
-
-### 在/etc/profile 文件中定义一个环境变量
-
-```
-vim /etc/profile
-环境变量名称=位置
-export 环境变量名称
-：wq
-```
-
-### 让环境变量生效
-
-```
-source /etc/profile
-```
-
-### 接着便可以在shell脚本中使用该环境变量
-
-## 将命令的返回值赋给变量
-
-```
-A=`命令` *使用反引号
-A=$(命令) *同理于反引号
-```
-
-```shell
-A=`ls -l /root`
-echo $A
-B=$(date)
-echo $B
-```
-
-<img src="https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220722140440717.png" alt="image-20220722140440717" style="zoom:200%;" />
-
-## 位置参数变量（相当于input
-
-希望获取到命令行的参数信息，便可以使用到位置参数变量
-
-```shell
-$n *n未数字，代表获取命令行的第几个数字，如果获取到数字是两位数，则需要${10} $0代表命令本身
-$# *显示参数的个数
-$* *这个命令行终端所有参数，但$*把所有参数看作一个整体
-$@ *显示命令行的所有参数，但是每一个参数区分对待
-```
-
-```shell
-echo "$1 $2"
-echo ""
-echo "$*"
-echo ""
-echo "$@"
-```
-
-![image-20220726171458293](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220726171458293.png)
-
-## 预定义变量
-
-```shell
-$$ 显示当前进程号的PID
-$! 后台运行的最后一个进程的进程号
-$? 最后一次执行命令的状态 0成功 非零可能失败
-```
-
-![image-20220725092113590](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220725092113590.png)
-
-![image-20220725092130988](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220725092130988.png)
-
-## 运算符
-
-```shell
-$((运算内容))
-```
-
-```shell
-`expr m + n` *运算符中间需要空格隔开
-```
-
-```shell
-$[运算内容]
-```
-
-## 条件判断
-
-```shell
-------------字符串比较
--lt *小于
--le *小于等于
--eq *等于
--ge *大于等于
--ne *不等于
-if [ "ok -eq ok" ]
-then
-	echo "1"
-fi
-------------按照文件权限进行判断
--r *读的权限
--w *写的权限
--x *执行的权限
-------------按照文件类型进行判断
--f *文件存在并且是一个常规的文件
--e *该文件存在
--d *文件存在并是一个目录
-if [ -e /root/a.txt ]
-then
-	echo '1'
-fi
-```
-
-```shell
-[ 条件 ] *中括号里放置条件，在条件前后需要使用空格进行隔开
-```
-
-## 流程控制
-
-### if
-
---------
-
-```shell
-A=100
-if [ $A -ge 60 ]
-then
-	echo "及格"
-elif [ $A -lt 60 ]
-then
-	echo "不及格"
-fi
-```
-
-### case
-
--------------
-
-```shell
-case $1 in
-"1")  *如果输入为1，执行下面的语句
-echo "monday"
-"2")  *如果输入为2，执行下面的语句，以此类推
-echo "thusday"
-*)    *如果都不是，执行下面的语句
-echo "other"
-esac
-```
-
-### for
-
---------
-
-有两种格式
-
-#### 第一种
-
-```shell
-sum=0
-for((i=1;i<=100;i++))
-do
-	sum=$[$sum+$i]
-done
-echo "sum=$sum"
-```
-
-![image-20220726173853033](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220726173853033.png)
-
-#### 第二种
-
-```shell
-for i in "$*"
-do
-	echo "$*" *由于@是当成一个参数读出，所以指挥输出一次。可对比$@
-done
-```
-
-### while
-
---------
-
-```shell
-while [ 判断语句 ]
-do
-	循环执行
-done
-```
-
-### read
-
---------
-
-可以用于读取控制台的输入（从控制台输入到程序中
-
-```shell
-read -p -t 时间秒数 "提示" 变量名称
-```
-
-```SHELL
-read -p "输入A的值" A
-echo "A的值为$A"
-read -t 5-p "五秒内输入B的值" B
-echo "B的值为$B"
-```
-
-![image-20220728101557433](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220728101557433.png)
-
-## 函数
-
-### 系统函数
-
-### basename
-
-------
-
-返回最后的文件名
-
-![image-20220728102123639](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220728102123639.png)
-
-### dirname
-
--------
-
-返回路径
-
-![image-20220728102156607](https://propran-img.oss-cn-hangzhou.aliyuncs.com/img/image-20220728102156607.png)
-
-### 自定义函数
-
-```shell
-function 函数名(){
-	内容
-}
-函数名 变量
-```
-
-```shell
-function getsum(){
-	SUM=$[$n1+$n2]
-	echo "SUM=$SUM"
-}
-read -p "n1:" n1
-read -p "n2:" n2
-getsum $n1 $n2
-```
-
-
-
+ 
